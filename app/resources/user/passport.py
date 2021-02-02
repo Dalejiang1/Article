@@ -1,18 +1,14 @@
-from flask import current_app,g
-
+from flask import current_app, g
 from flask_restful import Resource
 import random
-from flask_restful.inputs import regex
-from flask_restful.reqparse import RequestParser
-from sqlalchemy.orm import load_only
-
+from app import redis_client, db
 from models.user import User
 from utils.constants import SMS_CODE_EXPIRE
-from app import redis_client, db
-
-from datetime import datetime,timedelta
+from flask_restful.reqparse import RequestParser
+from datetime import datetime, timedelta
 from utils.jwt_util import generate_jwt
-
+from flask_restful.inputs import regex
+from sqlalchemy.orm import load_only
 class SMSCodeResource(Resource):
     """发送短信验证码视图类"""
     def get(self,mobile):
